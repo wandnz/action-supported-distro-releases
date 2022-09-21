@@ -1,0 +1,30 @@
+---
+name: Supported distribution release matrix generator
+description: Generate a GitHub Action matrix for all supported releases for Debian/Ubuntu.
+inputs:
+  distros:
+    description: Comma-separated list of distros to include in the matrix
+    required: false
+    default: "debian,ubuntu"
+  include-lts:
+    description: Set to true if distro release still supported by LTS should be included
+    required: false
+    default: "true"
+  include-extended-lts:
+    description: Set to true if distro release still supported by extended LTS should be included
+    required: false
+    default: "false"
+outputs:
+  matrix:
+    description: "json-encoded list of supported distro releases"
+    value: ${{ steps.generate-matrix.outputs.matrix }}
+runs:
+  using: composite
+  steps:
+    - id: generate-matrix
+      run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
+      env:
+        DISTROS: "${{ inputs.distros }}"
+        INCLUDE_LTS: "${{ inputs.include-lts }}"
+        INCLUDE_EXTENDED_LTS: "${{ inputs.include-extended-lts }}"
