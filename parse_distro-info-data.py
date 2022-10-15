@@ -65,7 +65,8 @@ def main():
                           f"support end date = {distro_end_date}")
 
     matrix = json.dumps(supported_distro_releases)
-    print(f"::set-output name=matrix::{matrix}")
+    with open(os.getenv('GITHUB_OUTPUT'), 'a', encoding='utf8') as output_file:
+        output_file.write(f"matrix={matrix}")
 
 
 if __name__ == "__main__":
