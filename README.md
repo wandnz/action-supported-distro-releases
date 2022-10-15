@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Generate matrix
         id: generate-matrix
-        uses: wanduow/action-supported-distro-releases@v1
+        uses: wandnz/action-supported-distro-releases@v1
 
   test:
     name: Run tests
@@ -62,7 +62,7 @@ jobs:
     steps:
       - name: Generate matrix
         id: generate-matrix
-        uses: wanduow/action-supported-distro-releases@v1
+        uses: wandnz/action-supported-distro-releases@v1
         with:
           include-lts: false
 ```
